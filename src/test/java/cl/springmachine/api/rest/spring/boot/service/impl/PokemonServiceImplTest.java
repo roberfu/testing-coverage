@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-class PokemonServiceImplTests {
+class PokemonServiceImplTest {
 
     @BeforeEach
     public void setup() {

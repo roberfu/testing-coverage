@@ -3,7 +3,7 @@ package cl.springmachine.api.rest.spring.boot.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class PokemonTests {
+class PokemonTest {
 
     @Test
     void equals() {

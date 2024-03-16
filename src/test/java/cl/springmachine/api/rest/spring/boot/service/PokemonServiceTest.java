@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-class PokemonServiceTests {
+class PokemonServiceTest {
 
     @BeforeEach
     public void setup() {

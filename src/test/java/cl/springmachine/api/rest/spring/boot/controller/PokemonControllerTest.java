@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-class PokemonControllerTests {
+class PokemonControllerTest {
 
     @BeforeEach
     public void setup() {
