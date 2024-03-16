@@ -38,7 +38,7 @@ class PokemonControllerTests {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void getPokemonTests() throws Exception {
+    void getPokemon() throws Exception {
         Integer id = 1;
         Pokemon pokemon = Pokemon.builder()
                 .id(id)
@@ -55,7 +55,7 @@ class PokemonControllerTests {
     }
 
     @Test
-    void savePokemonTests() throws Exception {
+    void savePokemon() throws Exception {
         Integer id = 1;
         Pokemon pokemon = Pokemon.builder()
                 .id(id)

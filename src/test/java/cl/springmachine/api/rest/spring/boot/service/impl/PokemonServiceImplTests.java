@@ -26,7 +26,7 @@ class PokemonServiceImplTests {
     private PokemonServiceImpl pokemonService;
 
     @Test
-    void savePokemonTests() {
+    void savePokemon() {
         Pokemon pokemon = Pokemon.builder()
                 .name("pikachu")
                 .type("electric")
@@ -47,7 +47,7 @@ class PokemonServiceImplTests {
     }
 
     @Test
-    void getPokemonTests() {
+    void getPokemon() {
         Pokemon pokemon = Pokemon.builder()
                 .id(1)
                 .name("pikachu")

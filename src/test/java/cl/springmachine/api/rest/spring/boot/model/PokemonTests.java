@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class PokemonTests {
 
     @Test
-    void equalsTests() {
+    void equals() {
         Pokemon first = Pokemon.builder()
                 .name("pikachu")
                 .type("electric")

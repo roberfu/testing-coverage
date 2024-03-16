@@ -19,7 +19,7 @@ class PokemonServiceTests {
     private PokemonService pokemonService;
 
     @Test
-    void getPokemonTests() {
+    void getPokemon() {
         Integer id = 1;
         Pokemon pokemon = Pokemon.builder()
                 .id(id)

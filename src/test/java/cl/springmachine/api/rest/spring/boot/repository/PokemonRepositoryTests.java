@@ -19,7 +19,7 @@ class PokemonRepositoryTests {
     private PokemonRepository pokemonRepository;
 
     @Test
-    void saveTests() {
+    void save() {
         Pokemon pokemon = Pokemon.builder()
                 .name("pikachu")
                 .type("electric")
@@ -33,7 +33,7 @@ class PokemonRepositoryTests {
     }
 
     @Test
-    void findAllTests() {
+    void findAll() {
         Pokemon first = Pokemon.builder()
                 .name("pikachu")
                 .type("electric")
@@ -55,7 +55,7 @@ class PokemonRepositoryTests {
     }
 
     @Test
-    void findByIdTests() {
+    void findById() {
         Pokemon pokemon = Pokemon.builder()
                 .name("pikachu")
                 .type("electric")
@@ -69,7 +69,7 @@ class PokemonRepositoryTests {
     }
 
     @Test
-    void deleteTest() {
+    void delete() {
         Pokemon pokemon = Pokemon.builder()
                 .name("pikachu")
                 .type("electric")
@@ -84,7 +84,7 @@ class PokemonRepositoryTests {
     }
 
     @Test
-    void findAllByTypeTests() {
+    void findAllByType() {
         Pokemon first = Pokemon.builder()
                 .name("pikachu")
                 .type("electric")
