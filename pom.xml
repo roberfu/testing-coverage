@@ -6,12 +6,12 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent fssssssrom repository -->
     </parent>
     <groupId>cl.springmachine</groupId>
-    <artifactId>api-rest-spring-boot</artifactId>
-    <version>0.0.2</version>
-    <name>api-rest-spring-boot</name>
+    <artifactId>testing-coverage-springboot</artifactId>
+    <version>0.0.1</version>
+    <name>testing-coverage-springboot</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>21</java.version>
@@ -45,12 +45,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
 
