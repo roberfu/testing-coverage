@@ -20,7 +20,7 @@ import cl.springmachine.api.pokemon.service.PokemonService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/api/pokemon")
+@RequestMapping(value = "/pokemon")
 @RequiredArgsConstructor
 public class PokemonController {
 

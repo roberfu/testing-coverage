@@ -15,3 +15,9 @@ spring:
     compose:
       stop:
         command: down
+server:
+  port: 8001
+  servlet:
+    context-path: /api
+  error:
+    include-message: always
