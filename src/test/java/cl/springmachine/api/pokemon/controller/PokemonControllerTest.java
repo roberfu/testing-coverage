@@ -35,15 +35,12 @@ class PokemonControllerTest {
 
 	@Test
 	void testGetAllByType() {
-
 		String type = "fire";
 		List<Pokemon> list = new ArrayList<>();
-
 		list.add(Pokemon.builder().id(1).name("charmander").type("fire").build());
 		list.add(Pokemon.builder().id(2).name("vulpix").type("fire").build());
 
 		Mockito.when(pokemonService.getAllByType(type)).thenReturn(list);
-
 		ResponseEntity<List<Pokemon>> response = pokemonController.getAllByType(type);
 
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -52,13 +49,10 @@ class PokemonControllerTest {
 
 	@Test
 	void testGetById() {
-
 		Integer id = 1;
-
 		Pokemon pokemon = Pokemon.builder().id(id).name("charmander").type("fire").build();
 
 		Mockito.when(pokemonService.getById(id)).thenReturn(pokemon);
-
 		ResponseEntity<Pokemon> response = pokemonController.getById(id);
 
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -74,6 +68,7 @@ class PokemonControllerTest {
 		ResponseEntity<Map<String, Integer>> response = pokemonController.save(pokemon);
 
 		Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
+		Assertions.assertNotNull(response.getBody());
 		Assertions.assertEquals(1, response.getBody().get("id"));
 
 	}

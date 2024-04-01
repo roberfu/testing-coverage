@@ -35,12 +35,10 @@ class PokemonServiceImplTest {
 	void testGetAllByType() {
 		String type = "fire";
 		List<Pokemon> list = new ArrayList<>();
-
 		list.add(Pokemon.builder().id(1).name("charmander").type("fire").build());
 		list.add(Pokemon.builder().id(2).name("vulpix").type("fire").build());
 
 		Mockito.when(pokemonRepository.findAllByType(type)).thenReturn(list);
-
 		List<Pokemon> response = pokemonService.getAllByType(type);
 
 		Assertions.assertEquals(response, list);
@@ -52,7 +50,6 @@ class PokemonServiceImplTest {
 		Pokemon pokemon = Pokemon.builder().id(1).name("charmander").type("fire").build();
 
 		Mockito.when(pokemonRepository.findById(1)).thenReturn(Optional.of(pokemon));
-
 		Pokemon response = pokemonService.getById(1);
 
 		Assertions.assertNotNull(response);
@@ -65,7 +62,6 @@ class PokemonServiceImplTest {
 
 		Mockito.when(pokemonRepository.save(Pokemon.builder().name("charmander").type("fire").build()))
 				.thenReturn(pokemon);
-
 		Integer id = pokemonService.save(Pokemon.builder().name("charmander").type("fire").build());
 
 		Assertions.assertNotNull(id);
