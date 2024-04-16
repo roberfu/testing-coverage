@@ -1,1 +1,1 @@
-# testing-coverage-springboot
+# testing-coverage-spring-boot
