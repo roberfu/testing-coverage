@@ -1,13 +1,12 @@
 package cl.springmachine.api.pokemon.repository;
 
-import java.util.List;
-
+import cl.springmachine.api.pokemon.model.PokemonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import cl.springmachine.api.pokemon.model.Pokemon;
+import java.util.List;
 
-public interface PokemonRepository extends JpaRepository<Pokemon, Integer> {
+public interface PokemonRepository extends JpaRepository<PokemonEntity, Integer> {
 
-	List<Pokemon> findAllByType(String type);
+    List<PokemonEntity> findAllByType(String type);
 
 }

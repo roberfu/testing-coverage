@@ -1,17 +1,17 @@
 package cl.springmachine.api.pokemon.service;
 
-import java.util.List;
+import cl.springmachine.api.pokemon.model.PokemonEntity;
 
-import cl.springmachine.api.pokemon.model.Pokemon;
+import java.util.List;
 
 public interface PokemonService {
 
-	List<Pokemon> getAllByType(String type);
+    List<PokemonEntity> getAllByType(String type);
 
-	Pokemon getById(Integer id);
+    PokemonEntity getById(Integer id);
 
-	Integer save(Pokemon pokemon);
+    Integer save(PokemonEntity pokemonEntity);
 
-	void delete(Integer id);
+    void delete(Integer id);
 
 }
