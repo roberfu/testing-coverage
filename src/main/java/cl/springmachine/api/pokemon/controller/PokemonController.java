@@ -1,5 +1,6 @@
 package cl.springmachine.api.pokemon.controller;
 
+import cl.springmachine.api.pokemon.model.PokemonDto;
 import cl.springmachine.api.pokemon.model.PokemonEntity;
 import cl.springmachine.api.pokemon.service.PokemonService;
 import org.springframework.http.HttpStatus;
@@ -21,12 +22,12 @@ public class PokemonController {
     }
 
     @GetMapping()
-    ResponseEntity<List<PokemonEntity>> getAllByType(@RequestParam String type) {
+    ResponseEntity<List<PokemonDto>> getAllByType(@RequestParam String type) {
         return new ResponseEntity<>(pokemonService.getAllByType(type), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
-    ResponseEntity<PokemonEntity> getById(@PathVariable(value = "id") Integer id) {
+    ResponseEntity<PokemonDto> getById(@PathVariable(value = "id") Integer id) {
         return new ResponseEntity<>(pokemonService.getById(id), HttpStatus.OK);
     }
 

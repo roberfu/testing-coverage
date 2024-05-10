@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import cl.springmachine.api.pokemon.model.PokemonDto;
 import cl.springmachine.api.pokemon.model.PokemonEntity;
 import cl.springmachine.api.pokemon.service.PokemonService;
 
@@ -33,12 +34,12 @@ class PokemonControllerTest {
 	@Test
 	void testGetAllByType() {
 		String type = "fire";
-		List<PokemonEntity> list = new ArrayList<>();
-		list.add(PokemonEntity.builder().id(1).name("charmander").type("fire").build());
-		list.add(PokemonEntity.builder().id(2).name("vulpix").type("fire").build());
+		List<PokemonDto> list = new ArrayList<>();
+		list.add(PokemonDto.builder().id(1).name("charmander").type("fire").build());
+		list.add(PokemonDto.builder().id(2).name("vulpix").type("fire").build());
 
 		when(pokemonService.getAllByType(type)).thenReturn(list);
-		ResponseEntity<List<PokemonEntity>> response = pokemonController.getAllByType(type);
+		ResponseEntity<List<PokemonDto>> response = pokemonController.getAllByType(type);
 
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
 		Assertions.assertEquals(list, response.getBody());
@@ -48,13 +49,13 @@ class PokemonControllerTest {
 	@Test
 	void testGetById() {
 		Integer id = 1;
-		PokemonEntity pokemonEntity = PokemonEntity.builder().id(id).name("charmander").type("fire").build();
+		PokemonDto pokemonDto = PokemonDto.builder().id(id).name("charmander").type("fire").build();
 
-		when(pokemonService.getById(id)).thenReturn(pokemonEntity);
-		ResponseEntity<PokemonEntity> response = pokemonController.getById(id);
+		when(pokemonService.getById(id)).thenReturn(pokemonDto);
+		ResponseEntity<PokemonDto> response = pokemonController.getById(id);
 
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-		Assertions.assertEquals(pokemonEntity, response.getBody());
+		Assertions.assertEquals(pokemonDto, response.getBody());
 
 	}
 

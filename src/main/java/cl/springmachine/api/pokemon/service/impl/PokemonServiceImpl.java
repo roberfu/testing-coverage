@@ -21,25 +21,25 @@ public class PokemonServiceImpl implements PokemonService {
     private final ExternalService externalService;
 
     @Override
-    public List<PokemonEntity> getAllByType(String type) {
-        return pokemonRepository.findAllByType(type);
+    public List<PokemonDto> getAllByType(String type) {
+        return pokemonRepository.findAllByType(type).stream()
+                .map(t -> PokemonDto.builder().id(t.getId()).name(t.getName()).type(t.getType()).build()).toList();
     }
 
     @Override
-    public PokemonEntity getById(Integer id) {
+    public PokemonDto getById(Integer id) {
         Optional<PokemonEntity> optional = pokemonRepository.findById(id);
-        return optional.orElse(null);
+        return optional.map(pokemonEntity -> PokemonDto.builder()
+                .id(pokemonEntity.getId()).name(pokemonEntity.getName())
+                .type(pokemonEntity.getType()).build()).orElse(null);
     }
 
     @Override
     @Transactional
     public Integer save(String name) {
         PokemonDto pokemonDto = externalService.findPokemon(name);
-        return pokemonRepository.save(PokemonEntity.builder()
-                .id(pokemonDto.getId())
-                .name(pokemonDto.getName())
-                .type(pokemonDto.getType())
-                .build()).getId();
+        return pokemonRepository.save(PokemonEntity.builder().id(pokemonDto.getId()).name(pokemonDto.getName())
+                .type(pokemonDto.getType()).build()).getId();
     }
 
     @Override

@@ -1,9 +1,13 @@
 package cl.springmachine.api.pokemon.service.impl;
 
-import cl.springmachine.api.pokemon.model.PokemonDto;
-import cl.springmachine.api.pokemon.model.PokemonEntity;
-import cl.springmachine.api.pokemon.repository.PokemonRepository;
-import cl.springmachine.api.pokemon.service.ExternalService;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,74 +15,78 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.Mockito.*;
+import cl.springmachine.api.pokemon.model.PokemonDto;
+import cl.springmachine.api.pokemon.model.PokemonEntity;
+import cl.springmachine.api.pokemon.repository.PokemonRepository;
+import cl.springmachine.api.pokemon.service.ExternalService;
 
 @ExtendWith(MockitoExtension.class)
 class PokemonServiceImplTest {
 
-    @Mock
-    private ExternalService externalService;
+	@Mock
+	private ExternalService externalService;
 
-    @Mock
-    private PokemonRepository pokemonRepository;
+	@Mock
+	private PokemonRepository pokemonRepository;
 
-    @InjectMocks
-    private PokemonServiceImpl pokemonService;
+	@InjectMocks
+	private PokemonServiceImpl pokemonService;
 
-    @Test
-    void testGetAllByType() {
-        String type = "fire";
-        List<PokemonEntity> list = new ArrayList<>();
-        list.add(PokemonEntity.builder().id(1).name("charmander").type("fire").build());
-        list.add(PokemonEntity.builder().id(2).name("vulpix").type("fire").build());
+	@Test
+	void testGetAllByType() {
+		String type = "fire";
+		List<PokemonDto> dtoList = new ArrayList<>();
+		dtoList.add(PokemonDto.builder().id(1).name("charmander").type("fire").build());
+		dtoList.add(PokemonDto.builder().id(2).name("vulpix").type("fire").build());
 
-        when(pokemonRepository.findAllByType(type)).thenReturn(list);
-        List<PokemonEntity> response = pokemonService.getAllByType(type);
+		List<PokemonEntity> entityList = new ArrayList<>();
+		entityList.add(PokemonEntity.builder().id(1).name("charmander").type("fire").build());
+		entityList.add(PokemonEntity.builder().id(2).name("vulpix").type("fire").build());
 
-        Assertions.assertEquals(response, list);
-        Assertions.assertEquals(2, response.size());
-    }
+		when(pokemonRepository.findAllByType(type)).thenReturn(entityList);
+		List<PokemonDto> response = pokemonService.getAllByType(type);
 
-    @Test
-    void testGetById() {
-        PokemonEntity pokemonEntity = PokemonEntity.builder().id(1).name("charmander").type("fire").build();
+		Assertions.assertEquals(response, dtoList);
+		Assertions.assertEquals(2, response.size());
+	}
 
-        when(pokemonRepository.findById(1)).thenReturn(Optional.of(pokemonEntity));
-        PokemonEntity response = pokemonService.getById(1);
+	@Test
+	void testGetById() {
+		PokemonEntity pokemonEntity = PokemonEntity.builder().id(1).name("charmander").type("fire").build();
 
-        Assertions.assertNotNull(response);
-        Assertions.assertEquals(pokemonEntity, response);
-    }
+		PokemonDto pokemonDto = PokemonDto.builder().id(1).name("charmander").type("fire").build();
 
-    @Test
-    void testSave() {
+		when(pokemonRepository.findById(1)).thenReturn(Optional.of(pokemonEntity));
+		PokemonDto response = pokemonService.getById(1);
 
-        String name = "charmander";
-        PokemonEntity pokemonEntity = PokemonEntity.builder().id(4).name("charmander").type("fire").build();
-        PokemonDto pokemonDto = PokemonDto.builder().id(4).name("charmander").type("fire").build();
+		Assertions.assertNotNull(response);
+		Assertions.assertEquals(pokemonDto, response);
+	}
 
-        when(pokemonRepository.save(PokemonEntity.builder().id(4).name("charmander").type("fire").build()))
-                .thenReturn(pokemonEntity);
-        when(externalService.findPokemon(name)).thenReturn(pokemonDto);
+	@Test
+	void testSave() {
 
+		String name = "charmander";
+		PokemonEntity pokemonEntity = PokemonEntity.builder().id(4).name("charmander").type("fire").build();
+		PokemonDto pokemonDto = PokemonDto.builder().id(4).name("charmander").type("fire").build();
 
-        Integer id = pokemonService.save(name);
+		when(pokemonRepository.save(PokemonEntity.builder().id(4).name("charmander").type("fire").build()))
+				.thenReturn(pokemonEntity);
+		when(externalService.findPokemon(name)).thenReturn(pokemonDto);
 
-        Assertions.assertNotNull(id);
-        Assertions.assertEquals(pokemonEntity.getId(), id);
-    }
+		Integer id = pokemonService.save(name);
 
-    @Test
-    void testDelete() {
-        Integer id = 1;
+		Assertions.assertNotNull(id);
+		Assertions.assertEquals(pokemonEntity.getId(), id);
+	}
 
-        pokemonService.delete(id);
+	@Test
+	void testDelete() {
+		Integer id = 1;
 
-        verify(pokemonRepository, times(1)).deleteById(id);
-    }
+		pokemonService.delete(id);
+
+		verify(pokemonRepository, times(1)).deleteById(id);
+	}
 
 }

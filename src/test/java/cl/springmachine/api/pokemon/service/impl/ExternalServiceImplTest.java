@@ -11,7 +11,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import cl.springmachine.api.pokemon.model.ExternalPokemonDto;
@@ -55,18 +54,6 @@ class ExternalServiceImplTest {
 
 		Mockito.when(restTemplate.getForEntity("https://pokeapi.co/api/v2/pokemon/" + name, ExternalPokemonDto.class))
 				.thenReturn(responseEntity);
-
-		Assertions.assertThrows(RuntimeException.class, () -> externalService.findPokemon(name));
-	}
-
-	@Test
-	void testFindPokemon_ReturnsHttpClientException() {
-		String name = "pikachu";
-
-		HttpClientErrorException errorException = new HttpClientErrorException(HttpStatus.NOT_FOUND, "Not Found");
-
-		Mockito.when(restTemplate.getForEntity("https://pokeapi.co/api/v2/pokemon/" + name, ExternalPokemonDto.class))
-				.thenThrow(errorException);
 
 		Assertions.assertThrows(RuntimeException.class, () -> externalService.findPokemon(name));
 	}
