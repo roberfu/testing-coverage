@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import cl.springmachine.api.pokemon.exception.CustomException;
 import cl.springmachine.api.pokemon.model.PokemonDto;
 import cl.springmachine.api.pokemon.model.PokemonEntity;
 import cl.springmachine.api.pokemon.service.PokemonService;
@@ -60,7 +61,7 @@ class PokemonControllerTest {
 	}
 
 	@Test
-	void testSave() {
+	void testSave() throws CustomException {
 
 		when(pokemonService.save(anyString())).thenReturn(1);
 

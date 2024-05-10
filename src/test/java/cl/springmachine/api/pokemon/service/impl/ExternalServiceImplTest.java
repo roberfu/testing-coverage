@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import cl.springmachine.api.pokemon.exception.CustomException;
 import cl.springmachine.api.pokemon.model.ExternalPokemonDto;
 import cl.springmachine.api.pokemon.model.PokemonDto;
 
@@ -26,7 +27,7 @@ class ExternalServiceImplTest {
 	private ExternalServiceImpl externalService;
 
 	@Test
-	void testFindPokemon_ReturnsOK() {
+	void testFindPokemon_ReturnsOK() throws CustomException {
 		String name = "pikachu";
 		ExternalPokemonDto externalPokemonDto = ExternalPokemonDto.builder().id(25).name("pikachu")
 				.types(List.of(ExternalPokemonDto.PokemonType.builder().slot(1)
@@ -55,7 +56,19 @@ class ExternalServiceImplTest {
 		Mockito.when(restTemplate.getForEntity("https://pokeapi.co/api/v2/pokemon/" + name, ExternalPokemonDto.class))
 				.thenReturn(responseEntity);
 
-		Assertions.assertThrows(RuntimeException.class, () -> externalService.findPokemon(name));
+		Assertions.assertThrows(CustomException.class, () -> externalService.findPokemon(name));
+	}
+
+	@Test
+	void testFindPokemon_ReturnsNullDto() throws CustomException {
+		String name = "pikachu";
+
+		ResponseEntity<ExternalPokemonDto> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
+
+		Mockito.when(restTemplate.getForEntity("https://pokeapi.co/api/v2/pokemon/" + name, ExternalPokemonDto.class))
+				.thenReturn(responseEntity);
+
+		Assertions.assertThrows(CustomException.class, () -> externalService.findPokemon(name));
 	}
 
 }

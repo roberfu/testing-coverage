@@ -1,11 +1,15 @@
 package cl.springmachine.api.pokemon.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class ExternalPokemonDto {
 
@@ -16,6 +20,8 @@ public class ExternalPokemonDto {
     List<PokemonType> types;
 
     @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     @Builder
     public static class PokemonType {
 
@@ -24,6 +30,8 @@ public class ExternalPokemonDto {
     }
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
     public static class Type {
 

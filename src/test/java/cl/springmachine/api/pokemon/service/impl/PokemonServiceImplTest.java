@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import cl.springmachine.api.pokemon.exception.CustomException;
 import cl.springmachine.api.pokemon.model.PokemonDto;
 import cl.springmachine.api.pokemon.model.PokemonEntity;
 import cl.springmachine.api.pokemon.repository.PokemonRepository;
@@ -64,7 +65,7 @@ class PokemonServiceImplTest {
 	}
 
 	@Test
-	void testSave() {
+	void testSave() throws CustomException {
 
 		String name = "charmander";
 		PokemonEntity pokemonEntity = PokemonEntity.builder().id(4).name("charmander").type("fire").build();
