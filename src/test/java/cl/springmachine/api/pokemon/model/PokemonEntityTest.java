@@ -10,7 +10,7 @@ class PokemonEntityTest {
         PokemonEntity first = new PokemonEntity(1, "charmander", "fire");
         PokemonEntity second = new PokemonEntity(2, "charizard", "fire");
         PokemonEntity repeatFirst = new PokemonEntity(1, "charmander", "fire");
-        PokemonEntity empty = new PokemonEntity();
+        PokemonEntity empty = PokemonEntity.builder().build();
         second.setType("dragon");
 
         Assertions.assertEquals(1, first.getId());

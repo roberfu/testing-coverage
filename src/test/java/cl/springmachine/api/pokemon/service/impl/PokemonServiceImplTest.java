@@ -1,7 +1,9 @@
 package cl.springmachine.api.pokemon.service.impl;
 
+import cl.springmachine.api.pokemon.model.PokemonDto;
 import cl.springmachine.api.pokemon.model.PokemonEntity;
 import cl.springmachine.api.pokemon.repository.PokemonRepository;
+import cl.springmachine.api.pokemon.service.ExternalService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +19,9 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PokemonServiceImplTest {
+
+    @Mock
+    private ExternalService externalService;
 
     @Mock
     private PokemonRepository pokemonRepository;
@@ -51,11 +56,17 @@ class PokemonServiceImplTest {
 
     @Test
     void testSave() {
-        PokemonEntity pokemonEntity = PokemonEntity.builder().id(1).name("charmander").type("fire").build();
 
-        when(pokemonRepository.save(PokemonEntity.builder().name("charmander").type("fire").build()))
+        String name = "charmander";
+        PokemonEntity pokemonEntity = PokemonEntity.builder().id(4).name("charmander").type("fire").build();
+        PokemonDto pokemonDto = PokemonDto.builder().id(4).name("charmander").type("fire").build();
+
+        when(pokemonRepository.save(PokemonEntity.builder().id(4).name("charmander").type("fire").build()))
                 .thenReturn(pokemonEntity);
-        Integer id = pokemonService.save(PokemonEntity.builder().name("charmander").type("fire").build());
+        when(externalService.findPokemon(name)).thenReturn(pokemonDto);
+
+
+        Integer id = pokemonService.save(name);
 
         Assertions.assertNotNull(id);
         Assertions.assertEquals(pokemonEntity.getId(), id);

@@ -1,20 +1,24 @@
 package cl.springmachine.api.pokemon.service.impl;
 
+import cl.springmachine.api.pokemon.model.PokemonDto;
 import cl.springmachine.api.pokemon.model.PokemonEntity;
 import cl.springmachine.api.pokemon.repository.PokemonRepository;
+import cl.springmachine.api.pokemon.service.ExternalService;
 import cl.springmachine.api.pokemon.service.PokemonService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class PokemonServiceImpl implements PokemonService {
 
     private final PokemonRepository pokemonRepository;
+
+    private final ExternalService externalService;
 
     @Override
     public List<PokemonEntity> getAllByType(String type) {
@@ -29,8 +33,13 @@ public class PokemonServiceImpl implements PokemonService {
 
     @Override
     @Transactional
-    public Integer save(PokemonEntity pokemonEntity) {
-        return pokemonRepository.save(pokemonEntity).getId();
+    public Integer save(String name) {
+        PokemonDto pokemonDto = externalService.findPokemon(name);
+        return pokemonRepository.save(PokemonEntity.builder()
+                .id(pokemonDto.getId())
+                .name(pokemonDto.getName())
+                .type(pokemonDto.getType())
+                .build()).getId();
     }
 
     @Override

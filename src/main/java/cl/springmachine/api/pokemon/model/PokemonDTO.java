@@ -1,5 +1,17 @@
 package cl.springmachine.api.pokemon.model;
 
-public record PokemonDTO(Integer id, String name, String type) {
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class PokemonDto {
+
+    private Integer id;
+
+    private String name;
+
+    private String type;
+
 
 }

@@ -3,16 +3,16 @@ package cl.springmachine.api.pokemon.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class PokemonDTOTest {
+class PokemonDtoTest {
 
 
     @Test
     void test() {
-        PokemonDTO first = new PokemonDTO(1, "charmander", "fire");
-        PokemonDTO second = new PokemonDTO(2, "vulpix", "fire");
-        PokemonDTO repeatFirst = new PokemonDTO(1, "charmander", "fire");
+        PokemonDto first = new PokemonDto(1, "charmander", "fire");
+        PokemonDto second = new PokemonDto(2, "vulpix", "fire");
+        PokemonDto repeatFirst = new PokemonDto(1, "charmander", "fire");
 
-        Assertions.assertEquals(1, first.id());
+        Assertions.assertEquals(1, first.getId());
         Assertions.assertEquals(first, repeatFirst);
         Assertions.assertNotEquals(first, second);
     }
