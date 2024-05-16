@@ -35,7 +35,7 @@ class ExternalServiceImplTest {
 				.build();
 		ResponseEntity<ExternalPokemonDto> responseEntity = new ResponseEntity<>(externalPokemonDto, HttpStatus.OK);
 
-		Mockito.when(restTemplate.getForEntity("https://pokeapi.co/api/v2/pokemon/" + name, ExternalPokemonDto.class))
+		Mockito.when(restTemplate.getForEntity(Mockito.anyString(), Mockito.eq(ExternalPokemonDto.class)))
 				.thenReturn(responseEntity);
 
 		PokemonDto pokemonDto = externalService.findPokemon(name);
@@ -53,7 +53,7 @@ class ExternalServiceImplTest {
 		ResponseEntity<ExternalPokemonDto> responseEntity = new ResponseEntity<>(null,
 				HttpStatus.INTERNAL_SERVER_ERROR);
 
-		Mockito.when(restTemplate.getForEntity("https://pokeapi.co/api/v2/pokemon/" + name, ExternalPokemonDto.class))
+		Mockito.when(restTemplate.getForEntity(Mockito.anyString(), Mockito.eq(ExternalPokemonDto.class)))
 				.thenReturn(responseEntity);
 
 		Assertions.assertThrows(CustomException.class, () -> externalService.findPokemon(name));
@@ -65,7 +65,7 @@ class ExternalServiceImplTest {
 
 		ResponseEntity<ExternalPokemonDto> responseEntity = new ResponseEntity<>(null, HttpStatus.OK);
 
-		Mockito.when(restTemplate.getForEntity("https://pokeapi.co/api/v2/pokemon/" + name, ExternalPokemonDto.class))
+		Mockito.when(restTemplate.getForEntity(Mockito.anyString(), Mockito.eq(ExternalPokemonDto.class)))
 				.thenReturn(responseEntity);
 
 		Assertions.assertThrows(CustomException.class, () -> externalService.findPokemon(name));

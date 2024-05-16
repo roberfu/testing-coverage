@@ -2,7 +2,6 @@ package cl.springmachine.api.pokemon.service.impl;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import cl.springmachine.api.pokemon.exception.CustomException;
@@ -44,7 +44,7 @@ class PokemonServiceImplTest {
 		entityList.add(PokemonEntity.builder().id(1).name("charmander").type("fire").build());
 		entityList.add(PokemonEntity.builder().id(2).name("vulpix").type("fire").build());
 
-		when(pokemonRepository.findAllByType(type)).thenReturn(entityList);
+		Mockito.when(pokemonRepository.findAllByType(Mockito.anyString())).thenReturn(entityList);
 		List<PokemonDto> response = pokemonService.getAllByType(type);
 
 		Assertions.assertEquals(response, dtoList);
@@ -57,7 +57,7 @@ class PokemonServiceImplTest {
 
 		PokemonDto pokemonDto = PokemonDto.builder().id(1).name("charmander").type("fire").build();
 
-		when(pokemonRepository.findById(1)).thenReturn(Optional.of(pokemonEntity));
+		Mockito.when(pokemonRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(pokemonEntity));
 		PokemonDto response = pokemonService.getById(1);
 
 		Assertions.assertNotNull(response);
@@ -71,9 +71,8 @@ class PokemonServiceImplTest {
 		PokemonEntity pokemonEntity = PokemonEntity.builder().id(4).name("charmander").type("fire").build();
 		PokemonDto pokemonDto = PokemonDto.builder().id(4).name("charmander").type("fire").build();
 
-		when(pokemonRepository.save(PokemonEntity.builder().id(4).name("charmander").type("fire").build()))
-				.thenReturn(pokemonEntity);
-		when(externalService.findPokemon(name)).thenReturn(pokemonDto);
+		Mockito.when(pokemonRepository.save(Mockito.any(PokemonEntity.class))).thenReturn(pokemonEntity);
+		Mockito.when(externalService.findPokemon(name)).thenReturn(pokemonDto);
 
 		Integer id = pokemonService.save(name);
 

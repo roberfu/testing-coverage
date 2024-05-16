@@ -3,7 +3,6 @@ package cl.springmachine.api.pokemon.controller;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ class PokemonControllerTest {
 		list.add(PokemonDto.builder().id(1).name("charmander").type("fire").build());
 		list.add(PokemonDto.builder().id(2).name("vulpix").type("fire").build());
 
-		when(pokemonService.getAllByType(type)).thenReturn(list);
+		Mockito.when(pokemonService.getAllByType(Mockito.anyString())).thenReturn(list);
 		ResponseEntity<List<PokemonDto>> response = pokemonController.getAllByType(type);
 
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -52,7 +52,7 @@ class PokemonControllerTest {
 		Integer id = 1;
 		PokemonDto pokemonDto = PokemonDto.builder().id(id).name("charmander").type("fire").build();
 
-		when(pokemonService.getById(id)).thenReturn(pokemonDto);
+		Mockito.when(pokemonService.getById(Mockito.anyInt())).thenReturn(pokemonDto);
 		ResponseEntity<PokemonDto> response = pokemonController.getById(id);
 
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -63,7 +63,7 @@ class PokemonControllerTest {
 	@Test
 	void testSave() throws CustomException {
 
-		when(pokemonService.save(anyString())).thenReturn(1);
+		Mockito.when(pokemonService.save(anyString())).thenReturn(1);
 
 		ResponseEntity<Map<String, Integer>> response = pokemonController.save("charmander");
 
