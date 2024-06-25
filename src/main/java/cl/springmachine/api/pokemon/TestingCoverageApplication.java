@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestingCoverageSpringBoot {
+public class TestingCoverageApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestingCoverageSpringBoot.class, args);
+        SpringApplication.run(TestingCoverageApplication.class, args);
     }
 
 }

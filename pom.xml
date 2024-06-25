@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>cl.springmachine</groupId>
-    <artifactId>testing-coverage-spring-boot</artifactId>
+    <artifactId>testing-coverage</artifactId>
     <version>0.0.1</version>
-    <name>testing-coverage-spring-boot</name>
+    <name>testing-coverage</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>21</java.version>
