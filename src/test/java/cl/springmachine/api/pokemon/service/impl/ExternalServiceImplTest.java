@@ -46,6 +46,7 @@ class ExternalServiceImplTest {
 		Assertions.assertEquals(name, pokemonDto.getName());
 	}
 
+	@SuppressWarnings("null")
 	@Test
 	void testFindPokemon_ReturnsRuntimeException() {
 		String name = "pikachu";
