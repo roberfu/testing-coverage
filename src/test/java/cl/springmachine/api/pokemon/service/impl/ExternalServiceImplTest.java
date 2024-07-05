@@ -59,6 +59,7 @@ class ExternalServiceImplTest {
 		Assertions.assertThrows(CustomException.class, () -> externalService.findPokemon(name));
 	}
 
+	@SuppressWarnings("null")
 	@Test
 	void testFindPokemon_ReturnsNullDto() throws CustomException {
 		String name = "pikachu";

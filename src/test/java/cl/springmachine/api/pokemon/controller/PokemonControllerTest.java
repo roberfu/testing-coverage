@@ -60,6 +60,7 @@ class PokemonControllerTest {
 
 	}
 
+	@SuppressWarnings("null")
 	@Test
 	void testSave() throws CustomException {
 
